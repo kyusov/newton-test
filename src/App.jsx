@@ -1,16 +1,18 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
 import { Home, Favorites } from './pages'
 import { Header } from './components'
+import { setPizzas } from './redux/actions/pizzas'
 
 function App() {
-  const [items, setItems] = React.useState([])
+  const dispatch = useDispatch()
 
   React.useEffect(() => {
     fetch('http://react-pizza-server.herokuapp.com/pizza')
       .then((data) => data.json())
-      .then((json) => setItems(json.pizzas))
+      .then((json) => dispatch(setPizzas(json.pizzas)))
   }, [])
 
   return (
@@ -22,7 +24,7 @@ function App() {
         ]}
       />
       <div className="content">
-        <Route path="/" render={() => <Home items={items} />} exact />
+        <Route path="/" component={Home} exact />
         <Route path="/fav" component={Favorites} exact />
       </div>
     </div>

@@ -50,6 +50,11 @@
 
     svg {
       width: 20px;
+      &.active {
+        path {
+          fill: #f2c94c;
+        }
+      }
     }
 
     &:hover {
