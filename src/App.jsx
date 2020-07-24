@@ -12,7 +12,7 @@ function App() {
   React.useEffect(() => {
     fetch('http://react-pizza-server.herokuapp.com/pizza')
       .then((data) => data.json())
-      .then((json) => dispatch(setPizzas(json.pizzas)))
+      .then((json) => dispatch(setPizzas(json.pizzas.map((e) => ({ ...e, isActive: false })))))
   }, [])
 
   return (

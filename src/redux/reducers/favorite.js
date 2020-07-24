@@ -10,10 +10,19 @@ const favorite = (state = initialState, action) => {
         ...state.items,
         {
           ...action.payload,
+          isActive: true,
         },
       ],
     }
   }
+
+  if (action.type === 'DELETE_FAVORITE') {
+    return {
+      ...state,
+      items: state.items.filter((e) => e.id !== action.payload),
+    }
+  }
+
   return state
 }
 

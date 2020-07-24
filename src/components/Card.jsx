@@ -1,12 +1,20 @@
 import React from 'react'
 
-function Card({ items, onClick }) {
-  const [favoriteItem, setFavoriteItem] = React.useState(false)
-
-  const onSelectItem = (index, item) => {
-    console.log(item?.active)
-    setFavoriteItem(!favoriteItem)
-    onClick(item)
+function Card({
+  items,
+  addItemToFavorite,
+  deleteItemFromFavorite,
+  removeStarFromItem,
+  addStarToItem,
+}) {
+  const onSelectItem = (item) => {
+    if (!item.isActive) {
+      addStarToItem(item.id)
+      addItemToFavorite(item)
+    } else {
+      removeStarFromItem(item.id)
+      deleteItemFromFavorite(item.id)
+    }
   }
 
   return items.map((e, i) => {
@@ -16,8 +24,10 @@ function Card({ items, onClick }) {
           <img className="card__image" src={e.imageUrl} alt="Item" />
           <div className="card__title">{e.name}</div>
           <div className="card__controls">
-            <div className="card__more button button--shadow">Узнать подробнее</div>
-            <div className="card__fav button button--shadow" onClick={() => onSelectItem(i, e)}>
+            {/* <div className="card__more button button--shadow">Узнать подробнее</div> */}
+            <div
+              className={`card__fav button button--shadow ${e.isActive ? 'active' : ''}`}
+              onClick={() => onSelectItem(e)}>
               <svg
                 height="511pt"
                 viewBox="0 -10 511.98645 511"

@@ -50,10 +50,11 @@
 
     svg {
       width: 20px;
-      &.active {
-        path {
-          fill: #f2c94c;
-        }
+    }
+
+    &.active {
+      svg path {
+        fill: #f2c94c;
       }
     }
 

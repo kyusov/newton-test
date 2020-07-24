@@ -1,6 +1,5 @@
 import { createStore } from 'redux'
 import rootReducer from './reducers'
-import { addFavorite } from './actions/favorite'
 
 const store = createStore(rootReducer)
 
